@@ -42,6 +42,10 @@ A simple blog application where users can post blogs.
 
 ### Set Database details in .env file
 
+### Create a symbolic-link to link public folder to storage folder
+
+```php artisan storage:link```
+
 ### Migrate the database tables (migrations)
 
 ```php artisan migrate```
