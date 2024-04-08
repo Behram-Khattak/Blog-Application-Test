@@ -10,6 +10,7 @@ A simple blog application where users can post blogs.
 - Email Notification
 
 ## Build Stack
+#### Tailwind, Alpine, Laravel, Livewire ( TALL )
 
 ### Frontend
 - Tailwind Css
