@@ -15,6 +15,7 @@ A simple blog application where users can post blogs.
 - Tailwind Css
 - Alpine Js
 - Blade
+- Livewire
 
 ### Backend
 - Php
