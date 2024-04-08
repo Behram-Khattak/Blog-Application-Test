@@ -54,4 +54,8 @@ A simple blog application where users can post blogs.
 
 ```npm install && npm run dev```
 
+### Testing Credentials
+- Admin email:( admin@demo.com ), password:( password )
+- User email:( user@demo.com ), password:( password ) 
+
 # Enjoy Testing...
