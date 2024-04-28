@@ -1,53 +1,56 @@
 <x-guest-layout>
     <div class="content max-w-screen-xl mx-auto px-4">
         {{-- blog posts cards --}}
-        {{-- <div class="posts my-6 sm:grid md:grid-cols-2 lg:grid-cols-3 gap-6 space-y-6 sm:space-y-0"> --}}
-            {{-- @forelse ($posts as $post)
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="{{ route('frontend.blog-post', [$post->id, $post->slug]) }}">
-                        <img class="rounded-t-lg"
-                            src="{{ asset('storage/thumbnails/'.$post->thumbnail) }}"
-                            alt="thumbnail" />
-                    </a>
-                    <div class="p-5">
-                        <a href="{{ route('frontend.blog-category-post', $post->category_id) }}">
-                            <span class="category font-bold capitalize bg-gray-200 p-2 rounded-full hover:underline">
-                                {{ $post->category->name }}
-                            </span>
-                        </a>
+        <livewire:load-more-posts />
 
-                        <a href="{{ route('frontend.blog-post', [$post->id, $post->slug]) }}">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight pt-2 text-gray-900 dark:text-white">
-                                {{ $post->title }}
-                            </h5>
-                        </a>
-                        <div class="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-2">
-                            {!! $post->description !!}
+        <div class="newsletter fixed bottom-12 right-0 z-50 p-6">
+            <button id="dropdownLeftButton" data-dropdown-toggle="dropdownLeft" data-dropdown-placement="left"
+                @click="transform = !transform"
+                class="overflow-hidden mb-3 md:mb-0 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                Subscribe
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="dropdownLeft" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <section class="bg-white shadow-xl w-[380px] rounded-lg border-2 dark:bg-gray-900">
+                    <div class="py-8 px-4 lg:px-6">
+                        <div class="sm:text-center">
+                            <h2 class="mb-4 text-3xl tracking-tight font-extrabold capitalize text-gray-900 sm:text-4xl dark:text-white">Sign up for our newsletter</h2>
+                            <p class="mb-8font-light text-gray-500 mb-12 text-md dark:text-gray-400">Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email.</p>
+                            <form action="#">
+                                <div class="items-center mb-3 space-y-4 sm:flex sm:space-y-0">
+                                    <div class="relative w-full">
+                                        <label for="email" class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
+                                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                        </div>
+                                        <input class="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your email" type="email" id="email" required="">
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-blue-700 border-blue-600 sm:rounded-none sm:rounded-r-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Subscribe</button>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-left text-gray-500 newsletter-form-footer dark:text-gray-300">We care about the protection of your data. <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Read our Privacy Policy</a>.</div>
+                            </form>
                         </div>
-                        <a href="{{ route('frontend.blog-post', [$post->id, $post->slug]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Read more
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
                     </div>
-                </div>
-            @empty
-                <div class="text-center">
-                    <h1 class=" text-4xl text-gray-400 mt-20 pb-12 font-extrabold">No Posts Yet !</h1>
-                    <caption>wanna write something...</caption>
-                    <a href="{{ route('frontend.blog-post-write') }}"
-                        class="text-md font-bold uppercase mx-4 border-blue-500 border-2 py-4 px-8 hover:bg-blue-500 hover:text-white">write</a>
-                </div>
-            @endforelse --}}
-            <livewire:load-more-posts />
-        {{-- </div> --}}
-        {{-- load more blog posts --}}
+                </section>
+            </div>
+        </div>
     </div>
 
     <x-slot:scripts>
         <script type="text/javascript">
-            //
+        // document.addEventListener('alpine:init', () => {
+        //     Alpine.data('app', () => ({
+        //         transform: false,
+        //         // animateTransform () {
+        //         //     let transform = this.animateTransform = true;
+
+        //         //     return transform;
+        //         // }
+        //     }));
+        // });
         </script>
     </x-slot:scripts>
 </x-guest-layout>

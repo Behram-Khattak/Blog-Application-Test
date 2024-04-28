@@ -72,7 +72,7 @@
                                                 @if (!$loop->last) , @endif
                                             @endforeach
                                         </td>
-                                        <td class="px-6 py-4 line-clamp-3">
+                                        <td class="px-6 py-4 line-clamp-1">
                                             {!! $post->description !!}
                                         </td>
                                         <td class="px-6 py-4">
