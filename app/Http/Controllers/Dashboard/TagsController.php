@@ -3,16 +3,29 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 
 class TagsController extends Controller
 {
+    public $tags;
+
+    /**
+     * This Constructor function will be execute by default whenever
+     * any function is called from this controller
+    */
+    public function __construct(Tags $tags) {
+        $this->tags = $tags;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('tags');
+        $tags = $this->tags->paginate();
+
+        return view('tags', compact('tags'));
     }
 
     /**
@@ -52,7 +65,18 @@ class TagsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'tag' => ['required', 'string', 'max:255'],
+        ]);
+
+        $update = $this->tags->findOrFail($id);
+
+        $update->update([
+            'name' => ucwords($request->tag),
+        ]);
+
+        return redirect(route('dashboard.tags'))
+            ->with('updated', 'Tag updated successfully !');
     }
 
     /**
@@ -60,6 +84,11 @@ class TagsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete = $this->tags->findOrFail($id);
+
+        $delete->delete();
+
+        return redirect(route('dashboard.tags'))
+            ->with('deleted', 'Tag deleted successfully !');
     }
 }

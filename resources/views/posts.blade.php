@@ -67,7 +67,10 @@
                                             {{ $post->category->name }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $post->tags }}
+                                            @foreach ($post->tags as $tag)
+                                                {{ $tag->name }}
+                                                @if (!$loop->last) , @endif
+                                            @endforeach
                                         </td>
                                         <td class="px-6 py-4 line-clamp-3">
                                             {!! $post->description !!}
@@ -77,11 +80,17 @@
                                                 width="200"
                                                 alt="thumbnail">
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 flex gap-4 items-center">
                                             <a href="{{ route('dashboard.posts.delete', $post->id) }}"
                                                     class="p-2 border-red-500 border-2 rounded hover:bg-red-500 hover:text-white">
                                                     Delete
                                             </a>
+                                            <div class="view-post">
+                                                <a href="{{ route('frontend.blog-post', [$post->id, $post->slug]) }}"
+                                                    class="p-2 border-blue-500 border-2 rounded hover:bg-blue-500 hover:text-white">
+                                                    View
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @empty

@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\WritePostRequest;
-use App\Mail\PostCreated;
 use App\Models\Category;
 use App\Models\Tags;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class WriteController extends Controller
@@ -62,7 +59,7 @@ class WriteController extends Controller
         $tagArray = [];
 
         foreach ($request->tags as $tags_name) {
-            $tags_id = $tags->create(['name' => $tags_name]);
+            $tags_id = $tags->create(['name' => ucwords($tags_name)]);
             $tagArray[] = $tags_id->id;
         }
 
