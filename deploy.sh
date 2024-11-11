@@ -33,7 +33,7 @@ php artisan migrate --force
 php artisan storage:link
 
 # Reload the Laravel application
-php artisan serve --host=0.0.0.0 --port=$PORT
+php artisan serve --host=0.0.0.0
 
 # Check if the environment variable is set to "false" or not set at all
 if [[ "${!ENV_VAR_NAME}" = "false" ]] || [[ -z "${!ENV_VAR_NAME}" ]]; then
