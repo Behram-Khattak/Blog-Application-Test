@@ -32,6 +32,9 @@ php artisan migrate --force
 # storage link
 php artisan storage:link
 
+# Reload the Laravel application
+php artisan serve --host=0.0.0.0 --port=$PORT
+
 # Check if the environment variable is set to "false" or not set at all
 if [[ "${!ENV_VAR_NAME}" = "false" ]] || [[ -z "${!ENV_VAR_NAME}" ]]; then
   echo "Exiting maintenance mode..."
