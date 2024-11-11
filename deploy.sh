@@ -11,11 +11,11 @@ if [[ "${!ENV_VAR_NAME}" = "true" ]]; then
   php artisan down
 fi
 
-# Build assets using NPM
-npm run build
-
 # Create a new key for the application
 php artisan key:generate
+
+# Build assets using NPM
+npm run build
 
 # Clear cache
 php artisan optimize:clear
@@ -28,6 +28,12 @@ php artisan view:cache
 
 # Run any database migrations
 php artisan migrate --force
+
+# storage link
+php artisan storage:link
+
+# Reload the Laravel application
+php artisan serve --host=0.0.0.0
 
 # Check if the environment variable is set to "false" or not set at all
 if [[ "${!ENV_VAR_NAME}" = "false" ]] || [[ -z "${!ENV_VAR_NAME}" ]]; then
