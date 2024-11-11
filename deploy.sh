@@ -14,6 +14,9 @@ fi
 # Build assets using NPM
 npm run build
 
+# Create a new key for the application
+php artisan key:generate
+
 # Clear cache
 php artisan optimize:clear
 
